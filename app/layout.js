@@ -1,15 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const poppins = Poppins({
+  weight:['300','400','500','600','700','800','900'],
+  subsets:['latin'],
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -20,9 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.className}`}
       >
-        {children}
+        <AppRouterCacheProvider>
+          <Header/>
+          <main className="overflow-x-hidden">
+            {children}
+          </main> 
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
